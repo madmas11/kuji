@@ -1,0 +1,84 @@
+body {
+    background: #3b3f41;
+
+}
+aside {
+    position: fixed; /* Добавьте эту строку */
+    top: 0; /* Добавьте эту строку */
+    bottom: 0; /* Добавьте эту строку */
+    background: black;
+    width: 20%;
+    color: white;
+    border-right: 5px solid #4d4d4d;
+    text-align: center;
+    padding: 0 0 2.5%;
+}
+aside img {
+    width: 100%;
+    vertical-align: 20px;
+}
+aside span.logo {
+    font-size: 40px;
+    margin-left: 1px;
+    font-weight: bold;
+    position: relative;
+    top: -5px;
+
+}
+main {
+    margin-left: 20%;
+    color: #f4f5f8;
+    margin-top: 60px;
+    text-align: center;
+    width: 80%;
+}
+main li {
+    padding: 2%;
+}
+aside ul {
+    text-align: center;
+    padding-right: 20px;
+}
+aside ul {list-style: none}
+aside ul li {
+    color: white;
+    display: block;
+    margin-top: 20px;
+    transition: all .6s ease;
+}
+aside ul li:hover, aside ul a:hover {
+    color: brown;
+    transform: scale(1.05);
+}
+aside ul a {
+    text-decoration: none;
+}
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    --bs-gutter-x: 1rem;
+}
+.column {
+    flex: 1; /* Каждый столбец занимает равное пространство */
+}
+h1 {
+    margin-bottom: 30px;
+}
+.video-title {
+    margin-bottom: 20px;
+}
+a {
+    color: #fffefe;
+    text-decoration: none;
+    display: block;
+    transition: all .6s ease;
+}
+a:hover {
+    color: brown;
+    transform: scale(1.05);
+}
+p a {
+    color: #e8732f;
+
+}

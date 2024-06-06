@@ -5,6 +5,6 @@ from . import views
 urlpatterns = [
     path('', views.index, name='home'),
     path('<int:pk>', views.detail_video, name='detail'),
-    # path('video/kuji_podkast/', kuji_video, name='podkast'),
-    # path('video/perst_fomi/', perst_video, name='perst')
+    path('kuji_podkast/', views.kuji_video, name='podkast'),
+    path('perst_fomi/', views.perst_video, name='perst')
 ]

@@ -5,6 +5,12 @@
 
 {% block content %}
     <h1>{{ title }}</h1>
+    {% if page.has_previous %}
+            <a href="?page={{ page.previous_page_number }}"> Предыдущая </a>
+        {% endif %}
+        {% if page.has_next %}
+            <a href="?page={{ page.next_page_number }}"> Следующая </a>
+        {% endif %}
         <div class="row">
             {% for v in video %}
                 <div class="column">

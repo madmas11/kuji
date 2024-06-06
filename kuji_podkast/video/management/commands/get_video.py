@@ -1,7 +1,9 @@
+import os
 from video.models import VideoYoutube, Channel
 from googleapiclient.discovery import build
 from django.core.management.base import BaseCommand
 
+DEV_TOKEN = os.getenv('DEVELOPER_YOUTUBE_KEY')
 channel_id = 'UCK8xpGAv8Oz7iMPgMw9j0LA'
 
 
@@ -14,7 +16,7 @@ class Command(BaseCommand):
             youtube = build(
                 'youtube',
                 'v3',
-                developerKey='AIzaSyBA0JpAOPaldQV_R2YpaM4Fg9r9xo-avAc'
+                developerKey=DEV_TOKEN
             )
             request_video = youtube.search().list(
                 part='snippet',

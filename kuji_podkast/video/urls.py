@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-# from .views import kuji_video, perst_video
+
 
 urlpatterns = [
     path('', views.index, name='home'),

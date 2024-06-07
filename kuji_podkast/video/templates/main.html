@@ -16,9 +16,7 @@
         <a href="{% url 'home' %}"><li>Главная</li></a>
         <a href="{% url 'podkast' %}"><li>KUJI-подкаст</li></a>
         <a href="{% url 'perst' %}"><li>Перст фомы</li></a>
-{#        <a href="{% url 'index_user' user.username %}"><li>Страница {{ user.username }}</li></a>#}
-
-
+        <a href="{% url 'user_page' user.username %}"><li>Страница {{ user.username }}</li></a>
 
     </ul>
 </aside>

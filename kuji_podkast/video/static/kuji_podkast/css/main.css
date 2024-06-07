@@ -80,5 +80,14 @@ a:hover {
 }
 p a {
     color: #e8732f;
-
+}
+.custom-form-group {
+    max-width: 400px;
+    margin-left: 50px;
+}
+.custom-button {
+    margin-top: 20px; /* Отступ сверху */
+    margin-left: 200px;
+    width: auto; /* Ширина по содержимому */
+    display: block; /* Блочный элемент для контроля отступов */
 }

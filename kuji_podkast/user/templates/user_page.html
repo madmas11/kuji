@@ -1,10 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'main.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="container text-center">
+    <h1>Добро пожаловать {{ user.username }}</h1>
+        <div class="row">
+            <div class="col order-last">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'user_comments' user.username %}" class="custom-href">Комментарии</a></h5>
+                        <p class="card-text">Тут собраны все твои оставленные комментарии</p>
+{#                        <a href="#" class="card-link">Card link</a>#}
+{#                        <a href="#" class="card-link">Another link</a>#}
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'user_favorites' user.username %}" class="custom-href">Избранное</a></h5>
+                        <p class="card-text">Посмотри свои видео, добавленные в избранное</p>
+{#                        <a href="#" class="card-link">Card link</a>#}
+{#                        <a href="#" class="card-link">Another link</a>#}
+                    </div>
+                </div>
+            </div>
+            <div class="col order-first">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'user_profile' user.username %}" class="custom-href">Профиль</a></h5>
+                        <p class="card-text">Тут ты можешь изменить свои данные:</p>
+                        <p class="card-text">Имя пользователя</p>
+                        <p class="card-text">Имя</p>
+                        <p class="card-text">Фамилию</p>
+                        <p class="card-text">Электронную почту</p>
+{#                        <a href="#" class="card-link">Card link</a>#}
+{#                        <a href="#" class="card-link">Another link</a>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

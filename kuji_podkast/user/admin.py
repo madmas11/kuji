@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser
+from .models import CustomUser, Comment, Favorite
 
 
 class CustomUserAdmin(UserAdmin):
@@ -26,4 +26,15 @@ class CustomUserAdmin(UserAdmin):
         }),
     )
 
+
+class FavoriteAdmin(admin.ModelAdmin):
+    list_display = ('user', 'video')
+
+
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ('user', 'video', 'text', 'post_date')
+
+
 admin.site.register(CustomUser, CustomUserAdmin)
+admin.site.register(Favorite, FavoriteAdmin)
+admin.site.register(Comment, CommentAdmin)

@@ -91,3 +91,31 @@ p a {
     width: auto; /* Ширина по содержимому */
     display: block; /* Блочный элемент для контроля отступов */
 }
+.custom-href {
+    color: #fffefe;
+    text-decoration: none;
+    display: block;
+    transition: all .6s ease;
+}
+.custom-href:hover {
+    color: brown;
+    transform: scale(1.05);
+
+}
+.custom-row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    --bs-gutter-x: 1rem;
+}
+.card {
+    --bs-card-bg: #4b4b4b;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+.toast-body {
+    color: black;
+}
+.custom-ul {
+    margin-left: 7%;
+}

@@ -5,8 +5,17 @@
 {% block content %}
     <h1>{{ video }}</h1>
     <iframe width="720" height="480" src="{{ video.video_id }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    <div class="gap-2">
+            {% if is_favorite %}
+                <a href="{% url 'remove_from_favorites' request.user.username video.id %}" class="btn btn-danger">Удалить из избранного</a>
+            {% else %}
+                <a href="{% url 'add_to_favorites' request.user.username video.id %}" class="btn btn-success">Добавить в избранное</a>
+            {% endif %}
+    </div>
     <details>
         <summary>Описание</summary>
         <p>{{ video.description | urlize | linebreaksbr }}</p>
     </details>
+
 {% endblock %}

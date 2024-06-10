@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from .models import VideoYoutube
+from user.models import Favorite
 
 
 def index(request):
@@ -14,8 +15,11 @@ def index(request):
 
 def detail_video(request, pk):
     video = VideoYoutube.objects.get(id=pk)
+    user = request.user
+    is_favorite = Favorite.objects.filter(user=user, video=video).exists()
     data = {
-        'video': video
+        'video': video,
+        'is_favorite': is_favorite
     }
     return render(request, 'video/detail_video.html', data)
 

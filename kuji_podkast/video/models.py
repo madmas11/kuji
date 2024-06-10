@@ -19,7 +19,7 @@ class VideoYoutube(models.Model):
         'perst': 'Perst fomi'
     }
     title = models.CharField('Заголовок', max_length=100)
-    video_id = models.CharField('Сылка на видео', max_length=250)
+    video_id = models.CharField('Ссылка на видео', max_length=250)
     description = models.TextField('Описание', )
     published_at = models.DateTimeField(verbose_name='Дата публикации')
     parts = models.CharField('Разделы', choices=SEGMENTS, max_length=100)

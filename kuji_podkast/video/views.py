@@ -5,6 +5,7 @@ from user.models import Favorite, Comment
 from user.forms import CommentForm
 from .utils import pluralize_comments
 
+
 def index(request):
     video_for_index = VideoYoutube.objects.order_by('-published_at')[:5]
     data = {

@@ -13,6 +13,28 @@
                 <a href="{% url 'add_to_favorites' request.user.username video.id %}" class="btn btn-success">Добавить в избранное</a>
             {% endif %}
     </div>
+    <div class="mt-4" style="margin-right: 20px; margin-left: 20px">
+        <h3>{{ count_comments }} {{ comment_labels }}</h3>
+        <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Оставить комментарий</button>
+            </form>
+
+        </div>
+
+    <div class="mt-4" style="max-height: 500px; overflow-y: auto; margin-right: 20px">
+            {% for comment in comments %}
+                <div class="card mb-2">
+                    <div class="card-body" style="text-align: left">
+                        <h5 class="card-title">{{ comment.user.username }}
+                            <small class="text-muted">{{ comment.post_date }} </small>
+                        </h5>
+                        <p class="card-text">{{ comment.text }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     <details>
         <summary>Описание</summary>
         <p>{{ video.description | urlize | linebreaksbr }}</p>

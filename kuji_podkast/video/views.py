@@ -1,8 +1,9 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import VideoYoutube
-from user.models import Favorite
-
+from user.models import Favorite, Comment
+from user.forms import CommentForm
+from .utils import pluralize_comments
 
 def index(request):
     video_for_index = VideoYoutube.objects.order_by('-published_at')[:5]
@@ -17,9 +18,26 @@ def detail_video(request, pk):
     video = VideoYoutube.objects.get(id=pk)
     user = request.user
     is_favorite = Favorite.objects.filter(user=user, video=video).exists()
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = user
+            comment.video = video
+            comment.save()
+            return redirect('detail', pk=video.id)
+    else:
+        form = CommentForm()
+    comments = Comment.objects.filter(video=video).order_by('-post_date')
+    count_comments = comments.count()
+    comment_labels = pluralize_comments(count_comments)
     data = {
         'video': video,
-        'is_favorite': is_favorite
+        'is_favorite': is_favorite,
+        'form': form,
+        'comments': comments,
+        'count_comments': count_comments,
+        'comment_labels': comment_labels
     }
     return render(request, 'video/detail_video.html', data)
 

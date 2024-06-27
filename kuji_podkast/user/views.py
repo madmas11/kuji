@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib import messages
+from django.contrib.auth import login, authenticate, logout
 from .models import CustomUser, Favorite, Comment
-from .forms import CustomUserChangeForm
+from .forms import CustomUserChangeForm, CustomUserCreationForm, CustomUserAuthenticationForm
 
 from video.models import VideoYoutube
 
@@ -83,3 +83,43 @@ def delete_comments(request, comment_id):
     comment = get_object_or_404(Comment, id=comment_id)
     comment.delete()
     return redirect('detail', pk=comment.video.id)
+
+
+def register(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+    else:
+        form = CustomUserCreationForm()
+        data = {
+            'form': form,
+            'title': 'Страница регистрации'
+        }
+    return render(request, 'register.html', data)
+
+
+def login_view(request):
+    if request.method == 'POST':
+        form = CustomUserAuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('home')
+    else:
+        form = CustomUserAuthenticationForm()
+    data = {
+        'form': form,
+        'title': 'Вход'
+    }
+    return render(request, 'login.html', data)
+
+
+def logout_view(requset):
+    logout(requset)
+    return redirect('home')

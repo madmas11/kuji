@@ -30,7 +30,10 @@
     {% else %}
         <div class="mt-4">
             <h3>Комментарии ({{ comment_count }} {{ comment_label }})</h3>
-            <p>Для того, чтобы оставить комментарий, пожалуйста, <a href="{% url 'login' %}">войдите в систему</a> или <a href="{% url 'register' %}">зарегистрируйтесь</a></p>
+            <p>Для того, чтобы оставить комментарий, пожалуйста,
+                <a href="{% url 'login' %}">войдите в систему</a>
+                или <a href="{% url 'register' %}">зарегистрируйтесь</a>
+            </p>
         </div>
     {% endif %}
     <div class="mt-4" style="max-height: 500px; overflow-y: auto; margin-right: 20px">

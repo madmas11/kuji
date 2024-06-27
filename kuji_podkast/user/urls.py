@@ -9,5 +9,5 @@ urlpatterns = [
     path('<str:username>/favorites/add/<int:video_id>/', views.add_to_favorites, name='add_to_favorites'),
     path('<str:username>/favorites/remove/<int:video_id>/', views.remove_from_favorites, name='remove_from_favorites'),
     path('<str:username>/comments/', views.user_comments, name='user_comments'),
-
+    path('comments/delete/<int:comment_id>/', views.delete_comments, name='delete_comments'),
 ]

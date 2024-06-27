@@ -5,24 +5,34 @@
 {% block content %}
     <h1>{{ video }}</h1>
     <iframe width="720" height="480" src="{{ video.video_id }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+    <details>
+        <summary>Описание</summary>
+        <p>{{ video.description | urlize | linebreaksbr }}</p>
+    </details>
     <div class="gap-2">
+        {% if user.is_authenticated %}
             {% if is_favorite %}
                 <a href="{% url 'remove_from_favorites' request.user.username video.id %}" class="btn btn-danger">Удалить из избранного</a>
             {% else %}
                 <a href="{% url 'add_to_favorites' request.user.username video.id %}" class="btn btn-success">Добавить в избранное</a>
             {% endif %}
+        {% endif %}
     </div>
-    <div class="mt-4" style="margin-right: 20px; margin-left: 20px">
-        <h3>{{ count_comments }} {{ comment_labels }}</h3>
-        <form method="post">
+    {% if user.is_authenticated %}
+        <div class="mt-4" style="margin-right: 20px; margin-left: 20px">
+            <h3>{{ count_comments }} {{ comment_labels }}</h3>
+            <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit" class="btn btn-primary">Оставить комментарий</button>
             </form>
-
         </div>
-
+    {% else %}
+        <div class="mt-4">
+            <h3>Комментарии ({{ comment_count }} {{ comment_label }})</h3>
+            <p>Для того, чтобы оставить комментарий, пожалуйста, <a href="{% url 'login' %}">войдите в систему</a> или <a href="{% url 'register' %}">зарегистрируйтесь</a></p>
+        </div>
+    {% endif %}
     <div class="mt-4" style="max-height: 500px; overflow-y: auto; margin-right: 20px">
             {% for comment in comments %}
                 <div class="card mb-2">
@@ -38,9 +48,5 @@
                 </div>
             {% endfor %}
         </div>
-    <details>
-        <summary>Описание</summary>
-        <p>{{ video.description | urlize | linebreaksbr }}</p>
-    </details>
 
 {% endblock %}

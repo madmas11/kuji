@@ -18,8 +18,12 @@ def index(request):
 def detail_video(request, pk):
     video = VideoYoutube.objects.get(id=pk)
     user = request.user
-    is_favorite = Favorite.objects.filter(user=user, video=video).exists()
+    is_favorite = False
+    if request.user.is_authenticated:
+        is_favorite = Favorite.objects.filter(user=request.user, video=video).exists()
     if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return redirect('login')
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)

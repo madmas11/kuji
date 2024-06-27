@@ -77,3 +77,9 @@ def remove_from_favorites(request, username, video_id):
         favorite.delete()
 
     return redirect('detail', pk=video_id)
+
+
+def delete_comments(request, comment_id):
+    comment = get_object_or_404(Comment, id=comment_id)
+    comment.delete()
+    return redirect('detail', pk=comment.video.id)

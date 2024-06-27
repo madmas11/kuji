@@ -31,6 +31,9 @@
                             <small class="text-muted">{{ comment.post_date }} </small>
                         </h5>
                         <p class="card-text">{{ comment.text }}</p>
+                        {% if comment.user == request.user %}
+                            <a href="{% url 'delete_comments' comment.id %}" class="btn btn-sm btn-danger">Удалить</a>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

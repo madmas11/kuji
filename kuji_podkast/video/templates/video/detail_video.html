@@ -18,9 +18,9 @@
             {% endif %}
         {% endif %}
     </div>
+    <h3>{{ count_comments }} {{ comment_labels }}</h3>
     {% if user.is_authenticated %}
         <div class="mt-4" style="margin-right: 20px; margin-left: 20px">
-            <h3>{{ count_comments }} {{ comment_labels }}</h3>
             <form method="post">
                 {% csrf_token %}
                 {{ form.as_p }}
@@ -29,7 +29,6 @@
         </div>
     {% else %}
         <div class="mt-4">
-            <h3>Комментарии ({{ comment_count }} {{ comment_label }})</h3>
             <p>Для того, чтобы оставить комментарий, пожалуйста,
                 <a href="{% url 'login' %}">войдите в систему</a>
                 или <a href="{% url 'register' %}">зарегистрируйтесь</a>

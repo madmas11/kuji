@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, authenticate, logout
+from django.contrib import messages
 from .models import CustomUser, Favorite, Comment
 from .forms import CustomUserChangeForm, CustomUserCreationForm, CustomUserAuthenticationForm
 
@@ -87,18 +88,24 @@ def delete_comments(request, comment_id):
 
 def register(request):
     if request.method == 'POST':
-        form = CustomUserCreationForm(request, data=request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
+            messages.success(request, 'Вы успешно зарегистрировались.')
             return redirect('home')
+        else:
+            for field in form:
+                for error in field.errors:
+                    messages.error(request, f'{field.label}: {error}')
     else:
         form = CustomUserCreationForm()
-        data = {
-            'form': form,
-            'title': 'Страница регистрации'
-        }
+    data = {
+        'form': form,
+        'title': 'Страница регистрации'
+    }
     return render(request, 'register.html', data)
+
 
 
 def login_view(request):

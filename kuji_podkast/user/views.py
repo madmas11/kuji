@@ -1,3 +1,4 @@
+from django.contrib.auth.password_validation import get_default_password_validators
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
@@ -87,6 +88,9 @@ def delete_comments(request, comment_id):
 
 
 def register(request):
+    password_validators = get_default_password_validators()
+    password_help_texts = [validator.get_help_text() for validator in password_validators]
+
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
@@ -102,10 +106,10 @@ def register(request):
         form = CustomUserCreationForm()
     data = {
         'form': form,
-        'title': 'Страница регистрации'
+        'title': 'Страница регистрации',
+        'password_help_texts': password_help_texts
     }
     return render(request, 'register.html', data)
-
 
 
 def login_view(request):

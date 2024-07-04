@@ -119,3 +119,9 @@ p a {
 .custom-ul {
     margin-left: 7%;
 }
+.register {
+    margin: 1rem 200px;
+}
+input {
+    margin: 10px;
+}
